@@ -1,0 +1,623 @@
+```html
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Raidsmp Store</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#080b12;
+    color:white;
+}
+
+/* NAVBAR */
+nav{
+    background:#0d121c;
+    border-bottom:1px solid #202a3b;
+    padding:18px 8%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    position:sticky;
+    top:0;
+    z-index:100;
+}
+
+.logo{
+    font-size:25px;
+    font-weight:bold;
+    color:#38a9ff;
+}
+
+.logo span{
+    color:white;
+}
+
+nav ul{
+    display:flex;
+    list-style:none;
+    gap:25px;
+}
+
+nav a{
+    color:#aaa;
+    text-decoration:none;
+}
+
+nav a:hover{
+    color:#38a9ff;
+}
+
+/* HERO */
+.hero{
+    min-height:470px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:40px 20px;
+    background:
+    radial-gradient(circle at center,#12365a 0%,#080b12 65%);
+}
+
+.hero h1{
+    font-size:55px;
+    margin-bottom:15px;
+}
+
+.hero h1 span{
+    color:#38a9ff;
+}
+
+.hero p{
+    color:#aaa;
+    max-width:650px;
+    line-height:1.6;
+    margin:auto;
+}
+
+.hero-btn{
+    display:inline-block;
+    margin-top:30px;
+    padding:14px 30px;
+    background:#168cff;
+    color:white;
+    text-decoration:none;
+    border-radius:8px;
+    font-weight:bold;
+}
+
+/* STORE */
+.store{
+    padding:70px 8%;
+}
+
+.title{
+    text-align:center;
+    margin-bottom:45px;
+}
+
+.title h2{
+    font-size:36px;
+}
+
+.title p{
+    color:#888;
+    margin-top:10px;
+}
+
+.products{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:25px;
+}
+
+.card{
+    background:#101722;
+    border:1px solid #202b3d;
+    border-radius:14px;
+    padding:27px;
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-7px);
+    border-color:#168cff;
+    box-shadow:0 10px 35px rgba(22,140,255,.15);
+}
+
+.card h3{
+    color:#38a9ff;
+    font-size:25px;
+    margin-bottom:15px;
+}
+
+.card p{
+    color:#999;
+    min-height:60px;
+    line-height:1.5;
+}
+
+.price{
+    font-size:25px;
+    font-weight:bold;
+    margin:20px 0;
+}
+
+.buy{
+    width:100%;
+    border:0;
+    padding:13px;
+    border-radius:7px;
+    background:#168cff;
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+    font-size:15px;
+}
+
+.buy:hover{
+    background:#006fe6;
+}
+
+/* POPUP */
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.75);
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+    z-index:999;
+}
+
+.modal-box{
+    background:#101722;
+    border:1px solid #29364a;
+    border-radius:15px;
+    width:100%;
+    max-width:550px;
+    max-height:90vh;
+    overflow-y:auto;
+    padding:30px;
+    position:relative;
+}
+
+.close{
+    position:absolute;
+    right:20px;
+    top:15px;
+    font-size:27px;
+    color:#aaa;
+    cursor:pointer;
+}
+
+.close:hover{
+    color:white;
+}
+
+.modal-box h2{
+    color:#38a9ff;
+    margin-bottom:5px;
+}
+
+.modal-price{
+    font-size:28px;
+    font-weight:bold;
+    margin:10px 0 20px;
+}
+
+.transfer{
+    background:#0b111b;
+    border:1px solid #26354a;
+    border-radius:10px;
+    padding:17px;
+    margin-bottom:20px;
+}
+
+.transfer strong{
+    color:#38a9ff;
+}
+
+.dana{
+    font-size:21px;
+    font-weight:bold;
+    margin-top:7px;
+}
+
+.features-title{
+    font-size:18px;
+    margin-bottom:10px;
+}
+
+.features{
+    list-style:none;
+}
+
+.features li{
+    padding:7px 0;
+    border-bottom:1px solid #1b2533;
+    color:#bbb;
+}
+
+.features li::before{
+    content:"✓";
+    color:#38a9ff;
+    margin-right:9px;
+}
+
+.warning{
+    margin-top:20px;
+    padding:15px;
+    background:#17130b;
+    border:1px solid #554018;
+    border-radius:8px;
+    color:#d5bd82;
+    font-size:14px;
+    line-height:1.5;
+}
+
+/* FOOTER */
+footer{
+    background:#06080d;
+    border-top:1px solid #1b2330;
+    text-align:center;
+    padding:30px;
+    color:#777;
+}
+
+footer span{
+    color:#38a9ff;
+}
+
+@media(max-width:700px){
+
+    nav{
+        padding:17px 5%;
+    }
+
+    nav ul{
+        gap:12px;
+        font-size:13px;
+    }
+
+    .hero h1{
+        font-size:40px;
+    }
+
+    .store{
+        padding:50px 5%;
+    }
+
+    .modal-box{
+        padding:23px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav>
+    <div class="logo">
+        Raid<span>SMP</span>
+    </div>
+
+    <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#store">Store</a></li>
+    </ul>
+</nav>
+
+
+<!-- HERO -->
+<section class="hero" id="home">
+    <div>
+        <h1>Raid<span>SMP</span> Store</h1>
+
+        <p>
+            Selamat datang di Raidsmp Store.
+            Dapatkan rank dan berbagai fitur eksklusif
+            untuk meningkatkan pengalaman bermainmu.
+        </p>
+
+        <a href="#store" class="hero-btn">
+            Lihat Store
+        </a>
+    </div>
+</section>
+
+
+<!-- STORE -->
+<section class="store" id="store">
+
+    <div class="title">
+        <h2>Store</h2>
+        <p>Pilih rank yang ingin kamu beli</p>
+    </div>
+
+    <div class="products">
+
+        <!-- RAID+ -->
+        <div class="card">
+            <h3>Raid+</h3>
+
+            <p>
+                Rank premium Raid+ dengan berbagai
+                fitur tambahan.
+            </p>
+
+            <div class="price">Rp20.000</div>
+
+            <button class="buy"
+            onclick="openModal('Raid+','20.000',[
+            '/ec',
+            '3 Home',
+            '/craft',
+            '/hat',
+            '/near',
+            '4x Common Key',
+            '2x Gold Key'
+            ])">
+                Beli Sekarang
+            </button>
+        </div>
+
+
+        <!-- RAID++ -->
+        <div class="card">
+            <h3>Raid++</h3>
+
+            <p>
+                Rank Raid++ dengan fitur dan key
+                yang lebih banyak.
+            </p>
+
+            <div class="price">Rp35.000</div>
+
+            <button class="buy"
+            onclick="openModal('Raid++','35.000',[
+            '/ec',
+            '5 Home',
+            '/feed',
+            '/heal',
+            '/repair',
+            '/back',
+            '3x Crimson Key',
+            '3x Gold Key',
+            '1x Amethyst Key'
+            ])">
+                Beli Sekarang
+            </button>
+        </div>
+
+
+        <!-- OVERWORLD -->
+        <div class="card">
+            <h3>Overworld</h3>
+
+            <p>
+                Akses fitur tambahan Overworld
+                untuk gameplay yang lebih lengkap.
+            </p>
+
+            <div class="price">Rp50.000</div>
+
+            <button class="buy"
+            onclick="openModal('Overworld','50.000',[
+            '/ec',
+            '7 Home',
+            '/workbench',
+            '/grindstone',
+            '/loom',
+            '/stonecutter',
+            '2x Gold Key',
+            '4x Amethyst Key'
+            ])">
+                Beli Sekarang
+            </button>
+        </div>
+
+
+        <!-- CUSTOM -->
+        <div class="card">
+            <h3>Custom</h3>
+
+            <p>
+                Paket custom dengan berbagai fitur
+                personalisasi.
+            </p>
+
+            <div class="price">Rp100.000</div>
+
+            <button class="buy"
+            onclick="openModal('Custom','100.000',[
+            '/ec',
+            '9 Home',
+            '/nick',
+            'Custom Prefix',
+            'Custom Chat Color',
+            '/anvil',
+            '/smithingtable',
+            '3x Gold Key',
+            '3x Amethyst Key',
+            '2x Crimson Key'
+            ])">
+                Beli Sekarang
+            </button>
+        </div>
+
+
+        <!-- DONATUR -->
+        <div class="card">
+            <h3>Donatur</h3>
+
+            <p>
+                Paket Donatur dengan fitur premium
+                dan berbagai bonus key.
+            </p>
+
+            <div class="price">Rp150.000</div>
+
+            <button class="buy"
+            onclick="openModal('Donatur','150.000',[
+            '/ec',
+            '/fly',
+            '12 Home',
+            '/speed',
+            '/ext',
+            'Custom Join Message',
+            '2x Amethyst Key',
+            '4x Crimson Key',
+            '1x Prime Key'
+            ])">
+                Beli Sekarang
+            </button>
+        </div>
+
+
+        <!-- DONATUR++ -->
+        <div class="card">
+            <h3>Donatur++</h3>
+
+            <p>
+                Paket donatur tertinggi dengan
+                fitur premium dan prioritas.
+            </p>
+
+            <div class="price">Rp200.000</div>
+
+            <button class="buy"
+            onclick="openModal('Donatur++','200.000',[
+            '/ec',
+            '/fly',
+            '14 Home',
+            '/speed',
+            '/ext',
+            'Custom Join Message',
+            '/jump',
+            '/top',
+            '/trash',
+            'Priority Queue',
+            'Premium Donatur++ Prefix',
+            '2x Amethyst Key',
+            '3x Crimson Key',
+            '3x Prime Key'
+            ])">
+                Beli Sekarang
+            </button>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- MODAL -->
+<div class="modal" id="paymentModal">
+
+    <div class="modal-box">
+
+        <div class="close" onclick="closeModal()">
+            &times;
+        </div>
+
+        <h2 id="rankName">Raid+</h2>
+
+        <div class="modal-price">
+            Rp<span id="rankPrice">20.000</span>
+        </div>
+
+        <div class="transfer">
+
+            <strong>Silahkan transfer pembayaran ke:</strong>
+
+            <div class="dana">
+                DANA: 088226696190
+            </div>
+
+        </div>
+
+        <div class="features-title">
+            <strong>Fitur yang didapat:</strong>
+        </div>
+
+        <ul class="features" id="featureList"></ul>
+
+        <div class="warning">
+            Setelah melakukan transfer, simpan bukti pembayaran
+            dan hubungi admin Raidsmp untuk proses pengiriman
+            rank.
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- FOOTER -->
+<footer>
+    © 2026 <span>Raidsmp Store</span> — All Rights Reserved.
+</footer>
+
+
+<script>
+
+function openModal(rank, price, features){
+
+    document.getElementById("rankName").innerText = rank;
+
+    document.getElementById("rankPrice").innerText = price;
+
+    const list = document.getElementById("featureList");
+
+    list.innerHTML = "";
+
+    features.forEach(function(feature){
+
+        const li = document.createElement("li");
+
+        li.innerText = feature;
+
+        list.appendChild(li);
+
+    });
+
+    document.getElementById("paymentModal").style.display = "flex";
+}
+
+
+function closeModal(){
+
+    document.getElementById("paymentModal").style.display = "none";
+
+}
+
+
+window.onclick = function(event){
+
+    const modal = document.getElementById("paymentModal");
+
+    if(event.target === modal){
+
+        closeModal();
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>
+```
